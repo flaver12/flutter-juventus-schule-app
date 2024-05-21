@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BMI App',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'BMI App'),
     );
   }
 }
@@ -58,12 +58,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Counter _counter = Counter(0);
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print("FIRST_PAGE: ${_counter.value}");
-  }
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -73,15 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter.value++;
     });
-
-
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Trigger a rebuild when coming back from the second page
-    setState(() {});
   }
 
   int _getCount() {
