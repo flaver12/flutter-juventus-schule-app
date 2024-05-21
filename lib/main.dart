@@ -1,3 +1,5 @@
+import 'package:bmi_app/counter.dart';
+import 'package:bmi_app/second-page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -55,8 +57,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
+  Counter _counter = Counter(0);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("FIRST_PAGE: ${_counter.value}");
+  }
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -64,8 +71,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      _counter.value++;
     });
+
+
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Trigger a rebuild when coming back from the second page
+    setState(() {});
+  }
+
+  int _getCount() {
+    return _counter.value;
   }
 
   @override
@@ -109,10 +129,12 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '${_getCount()}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text('Hello World', style: Theme.of(context).textTheme.headlineLarge),
+            ElevatedButton(onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage(counter: _counter))).then((_) => setState(() {})); // then == redraw
+            }, child: Text("Hello Press Me!")),
           ],
         ),
       ),
@@ -124,3 +146,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
