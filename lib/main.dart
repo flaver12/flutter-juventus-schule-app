@@ -1,4 +1,5 @@
 import 'package:bmi_app/bmi-show-result.dart';
+import 'package:bmi_app/bmi-categories.dart';
 import 'package:bmi_app/state/bmi-state.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'info') {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BmiCategories()));
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  value: 'info',
+                  child: Text('BMI Kategorien'),
+                )
+              ];
+            },
+          )
+        ],
       ),
       body: Center(
         child: Column(
