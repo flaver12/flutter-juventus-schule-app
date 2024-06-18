@@ -1,5 +1,6 @@
 import 'package:bmi_app/bmi-show-result.dart';
 import 'package:bmi_app/bmi-categories.dart';
+import 'package:bmi_app/user.dart';
 import 'package:bmi_app/state/bmi-state.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == 'info') {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => BmiCategories()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BmiCategories()));
+              } else if (value == 'user') {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserSelect()));
               }
             },
             itemBuilder: (BuildContext context) {
@@ -67,6 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 PopupMenuItem<String>(
                   value: 'info',
                   child: Text('BMI Kategorien'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'user',
+                  child: Text('Benutzer auswahl'),
                 )
               ];
             },
@@ -99,14 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            ElevatedButton(onPressed: () {
-              _updateInputNumber();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => BmiShowResult(bmiState: _bmiState))).then((_) => setState(() {})); // then == redraw
-            }, child: Text("Finde deinen BMI Heraus!")),
+            ElevatedButton(
+                onPressed: () {
+                  _updateInputNumber();
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  BmiShowResult(bmiState: _bmiState)))
+                      .then((_) => setState(() {})); // then == redraw
+                },
+                child: Text("Finde deinen BMI Heraus!")),
           ],
         ),
       ),
     );
   }
 }
-
